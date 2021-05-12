@@ -1,0 +1,55 @@
+<div class="addTask">
+  <h2 mat-dialog-title>
+    new task
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="taskDto" (ngSubmit)="addTask()">
+      <mat-form-field class="example-full-width">
+        <mat-label>title</mat-label>
+        <input
+          matInput
+          placeholder="title of task"
+          type="text"
+          name="title"
+          formControlName="title"
+          required />
+        <mat-error *ngIf="taskDto.get('title').errors?.required">
+            Task title is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>description</mat-label>
+        <input
+          matInput
+          placeholder="description of task"
+          type="text"
+          name="description"
+          formControlName="description"
+          required />
+        <mat-error *ngIf="taskDto.get('description').errors?.required">
+            Task description is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="choose image of task"
+          [value]="selectedImage"
+          style="cursor: pointer;"
+          (click)="file.click()" />
+        <input
+          #file
+          type="file"
+          style="display: none;"
+          name="image"
+          formControlName="image"
+          required
+          (change)="onChangeSelect($event)" />
+      </mat-form-field>
+
+      <button type="submit" [disabled]="taskDto.invalid || isSubmitted" mat-raised-button color="warn">Add task</button>
+    </form>
+  </mat-dialog-content>
+</div>

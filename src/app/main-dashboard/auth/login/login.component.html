@@ -1,0 +1,83 @@
+<section class="login">
+  <div class="content">
+    <h2>Login</h2>
+    <form [formGroup]="loginDto" (ngSubmit)="login()">
+      <mat-form-field class="example-form-field">
+        <mat-label>Enter Email</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Email"
+          formControlName="email"
+          required>
+        <mat-error *ngIf="loginDto.get('email').errors?.required">
+          Email is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field">
+        <mat-label>Enter Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password">
+        <mat-error *ngIf="loginDto.get('password').errors?.required">
+          password is required
+        </mat-error>
+      </mat-form-field>
+
+      <p class="forgot-password" (click)="helperService.openDialog(forgotPassword)">Forgot password</p>
+
+      <button class="btn btn-danger btn-block mt-2" type="submit">Login</button>
+      <a href="https://back-task22.herokuapp.com/auth/google" class="btn btn-block mt-2 text-white" mat-raised-button color="warn">SignIn With Google</a>
+      <a href="https://back-task22.herokuapp.com/auth/facebook" class="btn btn-block mt-2 text-white" mat-raised-button style="background: #3b5998">SignIn With FaceBook</a>
+    </form>
+  </div>
+
+</section>
+
+<ng-template #forgotPassword>
+  <form [formGroup]="forgotDto" (ngSubmit)="sentEmailForgotPassword()">
+    <h2 mat-dialog-title>
+      Enter your email
+    </h2>
+    <mat-dialog-content>
+      <div *ngIf="!isSent">
+        <mat-form-field class="example-form-field">
+          <mat-label>Enter Email</mat-label>
+          <input
+            matInput
+            type="email"
+            placeholder="email"
+            formControlName="email">
+          <mat-error *ngIf="loginDto.get('email').errors?.required">
+            Email is required
+          </mat-error>
+        </mat-form-field>
+
+        <button *ngIf="!isSent" class="btn btn-danger btn-block mt-2" type="submit">Sent Request</button>
+      </div>
+      <div *ngIf="isSent && message">
+        <p class="lead text-warning">
+          {{message}}
+        </p>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end" *ngIf="!showProgress">
+      <button mat-raised-button color="primary" (click)="helperService.hideDialog()" type="button">Cancel</button>
+    </mat-dialog-actions>
+    <mat-progress-bar class="mt-4" *ngIf="showProgress" mode="indeterminate"></mat-progress-bar>
+  </form>
+</ng-template>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="large"
+  color="#9344d4d"
+  type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">
+    {{state}}
+  </p>
+</ngx-spinner>

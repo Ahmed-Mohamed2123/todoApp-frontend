@@ -1,0 +1,90 @@
+<div class="tasks">
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between mt-2">
+      <div class="search">
+        <mat-form-field class="example-full-width">
+          <mat-label>Search</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Search tasks">
+        </mat-form-field>
+      </div>
+
+      <div class="add">
+        <button
+          mat-raised-button
+          color="warn"
+          style="outline: none;"
+          (click)="helperService.openDialog(addTask)">Add Task</button>
+      </div>
+    </div>
+
+
+
+    <mat-grid-list [cols]="cols" rowHeight="20:22" getterSize="10px">
+      <mat-grid-tile *ngFor="let task of tasks">
+        <div class="content">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <div class="name">
+            <p>{{task.title}}</p>
+          </div>
+          <div class="img-content">
+            <img [src]="task.image" alt="">
+          </div>
+
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>info</mat-icon>
+              <span>Information</span>
+            </button>
+            <button mat-menu-item (click)="helperService.openDialog(editTask)">
+              <mat-icon>edit_note</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="helperService.openDialog(deleteTask)">
+              <mat-icon>delete_forever</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+
+          <ng-template #editTask>
+            <app-edit-task
+              [task]="task"
+              [tasks]="tasks"
+              [userId]="userId"
+              (change)="RefreshContentWhenEditTask(tasks)"
+            ></app-edit-task>
+          </ng-template>
+
+          <ng-template #deleteTask>
+            <app-delete-task
+              [userId]="userId"
+              [task]="task"
+              [tasks]="tasks"
+              [startRefresh]="startRefresh"
+              (change)="refreshTasksDelete({ startRefresh: startRefresh })"
+            ></app-delete-task>
+          </ng-template>
+
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-paginator [length]="totalItem"
+                   [pageSize]="itemPerPage"
+                   [pageSizeOptions]="pageSizeOption"
+                   (page)="onChangePage($event)"></mat-paginator>
+  </div>
+</div>
+
+<ng-template #addTask>
+  <app-add-task
+    [userId]="this.userId"
+    [startRefresh]="startRefresh"
+    (change)="refreshTasks({ startRefresh: startRefresh, response: $event })"
+  ></app-add-task>
+</ng-template>

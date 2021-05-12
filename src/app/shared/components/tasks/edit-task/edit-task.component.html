@@ -1,0 +1,46 @@
+<div class="editTask">
+  <h2 mat-dialog-title>
+    edit task
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="editTaskDto" (ngSubmit)="editTask()">
+      <mat-form-field class="example-full-width">
+        <mat-label>title</mat-label>
+        <input
+          matInput
+          placeholder="title of task"
+          type="text"
+          name="title"
+          formControlName="title" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>description</mat-label>
+        <input
+          matInput
+          placeholder="description of task"
+          type="text"
+          name="description"
+          formControlName="description" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="choose image of task"
+          [value]="selectedImage"
+          style="cursor: pointer;"
+          (click)="file.click()" />
+        <input
+          #file
+          type="file"
+          style="display: none;"
+          name="image"
+          formControlName="image"
+          (change)="onChangeSelect($event)" />
+      </mat-form-field>
+
+      <button type="submit" [disabled]="editTaskDto.invalid || isSubmitted" mat-raised-button color="warn">Edit task</button>
+    </form>
+  </mat-dialog-content>
+</div>

@@ -1,0 +1,7 @@
+a {
+  text-decoration: none;
+  color: #FFF;
+  &:hover, &:active {
+    color: lightgray;
+  }
+}

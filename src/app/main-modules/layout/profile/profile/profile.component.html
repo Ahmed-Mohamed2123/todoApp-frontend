@@ -1,0 +1,26 @@
+<div class="profile pt-4">
+  <div class="container-fluid">
+    <div class="content d-flex align-content-center pb-4">
+      <div class="content-img">
+        <img src="./../../../../../assets/1.PNG">
+      </div>
+      <div class="content-botton ml-3">
+        <p>{{email}}</p>
+        <button mat-raised-button color="primary">Follow</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pb-3 container-fluid">
+  <nav mat-tab-nav-bar [backgroundColor]="background">
+    <a style="text-decoration: none;"
+      mat-tab-link
+      *ngFor="let link of links"
+      routerLinkActive
+      #elm="routerLinkActive"
+      [active]="elm.isActive"
+      [routerLink]="link"> {{link}} </a>
+  </nav>
+</div>
+
+<router-outlet></router-outlet>

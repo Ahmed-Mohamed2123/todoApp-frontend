@@ -1,0 +1,22 @@
+.login {
+  position: relative;
+  height: 100vh;
+  .content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #EEE;
+    padding: 15px;
+
+    .forgot-password {
+      color: #4a4848;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}

@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Task</h1>
+    <span class="menu-spacer"></span>
+    <div class="buttons">
+      <button mat-button routerLink='/auth/login' *ngIf="!authService.isLoggedIn()"> Login </button>
+      <button mat-button [routerLink]="'/auth/signup'" *ngIf="!authService.isLoggedIn()"> Sign up </button>
+      <button mat-raised-button color="warn" (click)="authService.Logout()" *ngIf="authService.isLoggedIn()"> Logout </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- Input / Output -->

@@ -1,0 +1,18 @@
+.profile {
+  background-color: #DDD;
+    .content-img {
+      width: 140px;
+      height: 140px;
+      img {
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .content-botton {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+}

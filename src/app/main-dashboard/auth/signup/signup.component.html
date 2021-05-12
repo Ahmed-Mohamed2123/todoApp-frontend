@@ -1,0 +1,59 @@
+<section class="signup">
+  <div class="content">
+    <h2>Sign Up</h2>
+    <form [formGroup]="signupDto" (ngSubmit)="signup()">
+      <mat-form-field class="example-form-field">
+        <mat-label>Enter Email</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Email"
+          formControlName="email"
+          required>
+        <mat-error *ngIf="signupDto.get('email').errors?.required">
+          Email is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field">
+        <mat-label>Enter Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password">
+        <mat-error *ngIf="signupDto.get('password').errors?.required">
+          password is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field">
+        <mat-label>Enter Confirm Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="passwordConfirm"
+          formControlName="passwordConfirm">
+        <mat-error *ngIf="signupDto.get('passwordConfirm').errors?.required">
+          passwordConfirm is required
+        </mat-error>
+        <mat-error *ngIf="signupDto.get('passwordConfirm').errors?.mustMatch">
+          passwordConfirmation, Enter the same password
+        </mat-error>
+      </mat-form-field>
+
+      <button class="btn btn-danger btn-block mt-2" type="submit">Signup</button>
+    </form>
+  </div>
+
+</section>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="large"
+  color="#9344d4d"
+  type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">
+    {{state}}
+  </p>
+</ngx-spinner>

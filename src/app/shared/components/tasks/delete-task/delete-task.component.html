@@ -1,0 +1,16 @@
+<div class="deleteTask">
+  <h2 mat-dialog-title style="margin-bottom: 0">
+    delete task
+  </h2>
+  <hr>
+  <mat-dialog-content>
+    <p class="text-danger">Are you sure delete this task!!!</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="deleteTask()"
+    >Delete Task</button>
+  </mat-dialog-actions>
+</div>
